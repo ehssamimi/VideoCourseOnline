@@ -17,6 +17,10 @@ import { getDirection } from './helpers/Utils';
 const ViewMain = React.lazy(() =>
   import(/* webpackChunkName: "views" */ './views')
 );
+const ViewUpload = React.lazy(() =>
+    import(/* webpackChunkName: "views-app" */ './views/upload')
+);
+
 const ViewApp = React.lazy(() =>
   import(/* webpackChunkName: "views-app" */ './views/app')
 );
@@ -81,6 +85,10 @@ class App extends Component {
                     authUser={loginUser}
                     component={ViewApp}
                   />
+                    <Route
+                        path="/upload"
+                        render={props => <ViewUpload {...props} />}
+                    />
                   <Route
                     path="/user"
                     render={props => <ViewUser {...props} />}

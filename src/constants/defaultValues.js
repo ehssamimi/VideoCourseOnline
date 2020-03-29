@@ -31,7 +31,7 @@ Color Options:
 */
 export const isMultiColorActive = true;
 export const defaultColor = "light.purple";
-export const defaultDirection = "ltr";
+export const defaultDirection = "rtl";
 export const isDarkSwitchActive = true;
 export const themeColorStorageKey="__theme_color";
 export const themeRadiusStorageKey = "__theme_radius";

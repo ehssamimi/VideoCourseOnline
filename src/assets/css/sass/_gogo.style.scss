@@ -6600,7 +6600,7 @@ input:-webkit-autofill {
   line-height: initial;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  //transform: translate(-50%, -50%);
   font-size: 3.5em;
   width: 2.5em;
   border: 0.06666em solid $input-background;
@@ -6634,7 +6634,7 @@ input:-webkit-autofill {
 
 .video-js .vjs-control-bar {
   background: initial;
-  margin: 1.75rem;
+  //margin: 1.75rem;
   width: calc(100% - 3.5rem);
 
   .vjs-control.vjs-button,
