@@ -127,7 +127,8 @@ html {
 }
 
 body {
-  font-family: "Nunito", sans-serif;
+  //font-family: "Nunito", sans-serif;
+  font-family: IRANSans, sans-serif;
   font-size: 0.8rem;
   font-weight: 400;
   color: $primary-color;
@@ -8645,5 +8646,104 @@ i.large-icon {
       border-top-right-radius: 0.75rem;
       border-bottom-right-radius: 0.75rem;
     }
+  }
+}
+
+//************personal edit********
+
+.primary-color{
+  color: $theme-color-1;
+}
+.circle-border-icon {
+  background: unset;
+  border: 1px solid $theme-color-1;
+  color: $theme-color-1;
+  padding: 4px;
+  border-radius: 50%;
+}
+.circle-border-icon:hover {
+  background: $theme-color-1;
+  border: 1px solid $theme-color-1;
+   padding: 4px;
+  border-radius: 50%;
+  color: white!important;
+  cursor: pointer;
+}
+
+.PermissionCard {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+.PermissionCard .card h2 {
+  font-size: 1rem;
+  color: $theme-color-1;
+}
+
+.PermissionCard p {
+  margin-bottom: 1.5em;
+  color: #898989;
+}
+
+
+.PermissionCard .card {
+  background: white;
+  margin-bottom: 2em;
+}
+
+.PermissionCard .card a {
+  color: black;
+  text-decoration: none;
+}
+
+//.PermissionCard .card :hover {
+//  box-shadow: -3px 3px 8px hsl(0, 0%, 80%);
+//}
+
+.PermissionCard .card-content {
+  padding: 1.4em;
+}
+
+.PermissionCard .card-content h2 {
+  margin-top: 0;
+  margin-bottom: .5em;
+  font-weight: bold;
+}
+
+.PermissionCard .card-content p {
+  font-size: 85%;
+}
+
+/* Flexbox stuff */
+
+
+.PermissionCard .card {
+  flex: 1 0 500px;
+  box-sizing: border-box;
+  margin: 1rem .25em;
+}
+
+@media screen and (min-width: 40em) {
+  .PermissionCard .card {
+    max-width: calc(50% -  1em);
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .PermissionCard .card {
+    max-width: calc(25% - 1em);
+  }
+}
+
+.PermissionCard .centered {
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+@media screen and (min-width: 52em) {
+  .PermissionCard  .centered {
+    max-width: 52em;
   }
 }

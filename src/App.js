@@ -20,6 +20,9 @@ const ViewMain = React.lazy(() =>
 const ViewUpload = React.lazy(() =>
     import(/* webpackChunkName: "views-app" */ './views/upload')
 );
+const ViewAccessLevel = React.lazy(() =>
+    import(/* webpackChunkName: "views-app" */ './views/accessLevel')
+);
 
 const ViewApp = React.lazy(() =>
   import(/* webpackChunkName: "views-app" */ './views/app')
@@ -88,6 +91,10 @@ class App extends Component {
                     <Route
                         path="/upload"
                         render={props => <ViewUpload {...props} />}
+                    />
+                    <Route
+                        path="/access-level"
+                        render={props => <ViewAccessLevel {...props} />}
                     />
                   <Route
                     path="/user"

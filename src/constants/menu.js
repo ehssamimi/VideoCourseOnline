@@ -1,5 +1,30 @@
 const data = [
     {
+        id: "access_level",
+        icon: "iconsminds-air-balloon-1",
+        label: "AccessLevel",
+        to: "/access-level",
+        subs: [
+            {
+                icon: "simple-icon-paper-plane",
+                label: "permission",
+                to: "/access-level/permission",
+                subs: [
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "permission Show",
+                        to: "/access-level/permission/show"
+                    },
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "permission Create",
+                        to: "/access-level/permission/create"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         id: "gogo",
         icon: "iconsminds-air-balloon-1",
         label: "menu.gogo",
