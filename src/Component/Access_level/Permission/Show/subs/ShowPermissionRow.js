@@ -1,18 +1,25 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState} from 'react';
 import {ModalDelete} from "../../../../Common/Modals/ModalDelete/ModalDelete";
 import {DeletePermission} from "../../../../functions/ServerConnection";
+import {error_Notification,success_Notification,RemoveItem} from "../../../../functions/componentHelpFunction";
 export default function  ShowPermissionRow(props){
     const [openModal,setOpenModal]=useState(false);
-    let {permission_name,description}=props.content;
+    let {permission_name,description,id}=props.content;
     const handelDelete=async()=>{
         let Response = await DeletePermission(permission_name);
-        console.log(Response)
-        setOpenModal(!openModal)
+        setOpenModal(!openModal);
+        let{state,Description}=Response;
+        if (state===200) {
+            success_Notification("permission شما حذف شد ");
+            RemoveItem(id)
+        }else{
+            error_Notification(state,Description)
+        }
     };
 
     return (
 
-        <article className="card mainCard" dir='rtl'>
+        <article className="card mainCard" dir='rtl' id={id}>
             <div className="card-content">
                 <div className='d-flex'>
                     <h2>{permission_name} </h2>
@@ -27,12 +34,3 @@ export default function  ShowPermissionRow(props){
     );
 }
 
-//
-// class ShowPermissionRow extends Component {
-//     render() {
-//         let {permission_name,description}=this.props.content;
-//
-//     }
-// }
-//
-// export default ShowPermissionRow;

@@ -156,44 +156,44 @@ import axios from "axios";
 // //     return resp;
 //
 // }
-// export async  function  GetCategoriesNameID(){
-//
-//     let headers = {
-//         'Token': Const.Token,
-//         'Id': Const.ID,
-//     };
-//
-//     let res = await axios.get(`${Const.product}admin/category/get/list-image-id`, {headers: headers});
-//        let { status,data} = res ;
-//
-//     if (status===200) {
-//         return data
-//     }else {
-//         return ""
-//     }
-//
-//
-// }
-// export async  function  GetProductNameID(name){
-//
-//     let headers = {
-//         'Token': Const.Token,
-//         'Id': Const.ID,
-//     };
-//
-//     let res = await axios.get(`${Const.product}admin/homepage/product-list?name=${name}`, {headers: headers});
-//     console.log(res);
-//
-//        let { status,data} = res ;
-//
-//     if (status===200) {
-//         return data
-//     }else {
-//         return ""
-//     }
-//
-//
-// }
+export async  function  GetCategoriesNameID(){
+
+    let headers = {
+        'Token': Const.Token,
+        'Id': Const.ID,
+    };
+
+    let res = await axios.get(`${Const.product}admin/category/get/list-image-id`, {headers: headers});
+       let { status,data} = res ;
+
+    if (status===200) {
+        return data
+    }else {
+        return ""
+    }
+
+
+}
+export async  function  GetProductNameID(name){
+
+    let headers = {
+        'Token': Const.Token,
+        'Id': Const.ID,
+    };
+
+    let res = await axios.get(`${Const.product}admin/homepage/product-list?name=${name}`, {headers: headers});
+    console.log(res);
+
+       let { status,data} = res ;
+
+    if (status===200) {
+        return data
+    }else {
+        return ""
+    }
+
+
+}
 //
 //
 //
@@ -301,15 +301,15 @@ import axios from "axios";
 //
 //
 // // *********Slider*********
-// export async  function  GetDestination( ) {
-//     let headers = {
-//         'Token': Const.Token,
-//         'Id': Const.ID
-//     };
-//     let res = await axios.get(`${Const.HomePage}banners/destinations`, {headers: headers});
-//     let {data} = res;
-//     return data
-// }
+export async  function  GetDestination( ) {
+    let headers = {
+        'Token': Const.Token,
+        'Id': Const.ID
+    };
+    let res = await axios.get(`${Const.HomePage}banners/destinations`, {headers: headers});
+    let {data} = res;
+    return data
+}
 // export async  function  AddSlider(Name,Number){
 //     let formData = new FormData();
 //     formData.append("Name", Name);
@@ -1430,17 +1430,46 @@ export async  function  GetAllPermission(page_number){
         'accept': 'application/json'
     };
 
-    console.log(`${Const.Liara_Url}permissions/get-all?page=${page_number}`)
     var resp ="";
     await axios.get(`${Const.Liara_Url}permissions/get-all?page=${page_number}`, {headers: headers}).then(function (response) {
         console.log(response );
-        let {Description}=response.data;
-        // let {Items} = response.data;
-        resp=Description;
+
+        let {permissions,page}=response.data;
+        resp={state:200,Description:permissions,page:page};
     }).catch(function (error) {
+        console.log(error.response);
         console.log(error);
-        console.log(error.message);
-        resp='error'
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  SuggestPermission(name){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}permissions/drop-down?permission_name=${name}`, {headers: headers}).then(function (response) {
+        console.log(response );
+
+
+        resp={state:200,Description:response.data.data };
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
     });
     return resp;
 }
@@ -1451,18 +1480,25 @@ export async  function  AddPermission(Data){
         'Content-Type': 'application/json',
         'accept': 'application/json'
     };
+    console.log(Data);
 
-    console.log(`${Const.Liara_Url}permissions/add`);
+
     var resp ="";
     await axios.post(`${Const.Liara_Url}permissions/add`, Data, {headers: headers}).then(function (response) {
         console.log(response );
         let {Description}=response.data;
         // let {Items} = response.data;
-        resp=Description;
+        resp={state:200,Description:Description};
+
     }).catch(function (error) {
+        console.log(error.response);
         console.log(error);
-        console.log(error.message);
-        resp='error'
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
     });
     return resp;
 }

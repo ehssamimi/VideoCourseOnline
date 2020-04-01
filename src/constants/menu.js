@@ -21,6 +21,23 @@ const data = [
                         to: "/access-level/permission/create"
                     }
                 ]
+            },
+            {
+                icon: "simple-icon-paper-plane",
+                label: "Role",
+                to: "/access-level/role",
+                subs: [
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "role Show",
+                        to: "/access-level/role/show"
+                    },
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "role Create",
+                        to: "/access-level/role/create"
+                    }
+                ]
             }
         ]
     },

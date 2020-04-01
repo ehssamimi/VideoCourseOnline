@@ -1,4 +1,6 @@
-import React, { useState,useEffect } from 'react';
+import React
+    // , { useState,useEffect }
+    from 'react';
 import {Modal, ModalBody, ModalHeader,ModalFooter,Button} from "reactstrap";
 
 export function ModalDelete (props){

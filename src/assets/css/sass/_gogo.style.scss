@@ -8747,3 +8747,20 @@ i.large-icon {
     max-width: 52em;
   }
 }
+
+.img-self-fill{
+  object-fit: fill;
+  width: 100%;
+}
+
+.line {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #cad3d3;
+}
+.tags{
+  padding: 2em;
+}
+.fs-tag{
+  font-size: 90%;
+
+}

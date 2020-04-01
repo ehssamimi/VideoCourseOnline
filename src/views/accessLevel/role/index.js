@@ -2,13 +2,12 @@ import React, { Component, Suspense } from 'react';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import AppLayout from '../../layout/AppLayout';
 
-const Permission = React.lazy(() =>
-  import(/* webpackChunkName: "viwes-gogo" */ './permission')
+const Show = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './../../../Component/Access_level/Role/Show/Show_role')
 );
-const Roles = React.lazy(() =>
-  import(/* webpackChunkName: "viwes-gogo" */ './role')
+const Create = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './../../../Component/Access_level/Role/Create/Create_Role')
 );
 
 
@@ -17,25 +16,25 @@ class App extends Component {
     const { match } = this.props;
 
     return (
-      <AppLayout>
+
         <div className="dashboard-wrapper">
           <Suspense fallback={<div className="loading" />}>
             <Switch>
-              <Redirect exact from={`${match.url}/`} to={`${match.url}/permission`} />
+              <Redirect exact from={`${match.url}/`} to={`${match.url}/show`} />
               <Route
-                path={`${match.url}/permission`}
-                render={props => <Permission {...props} />}
+                path={`${match.url}/show`}
+                render={props => <Show {...props} />}
               />
                 <Route
-                path={`${match.url}/role`}
-                render={props => <Roles {...props} />}
+                path={`${match.url}/create`}
+                render={props => <Create {...props} />}
               />
 
               <Redirect to="/error" />
             </Switch>
           </Suspense>
         </div>
-      </AppLayout>
+
     );
   }
 }
