@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {FormGroup, Label} from "reactstrap";
-import AutoSuggestEdit from "../../../../Common/AutoSuggestEdit/AutoSuggestEdit";
-import {GetCategoriesNameID, GetDestination, GetProductNameID,SuggestPermission} from "../../../../functions/ServerConnection";
+import AutoSuggestEdit from "../../../../../Common/AutoSuggestEdit/AutoSuggestEdit";
+import {GetCategoriesNameID, GetDestination, GetProductNameID,SuggestPermission} from "../../../../../functions/ServerConnection";
 
 class AddPermissionProperties extends Component {
     constructor(props) {
