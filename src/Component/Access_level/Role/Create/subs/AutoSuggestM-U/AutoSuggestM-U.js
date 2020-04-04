@@ -1,13 +1,14 @@
 import React from 'react';
-import fetch from 'cross-fetch';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {SuggestPermission} from "../../../../../functions/ServerConnection";
-
 
 export default function AutoSuggestMU(props) {
+    let {error,name,getnamefromOption}=props;
+    // console.log(error)
+
     const [open, setOpen] = React.useState(false);
+    const [defaultValue, setdefaultValue] = React.useState([]);
     const [options, setOptions] = React.useState([]);
     const [inputValue, setinputValue] = React.useState('a');
     const loading = open && options.length === 0;
@@ -18,28 +19,23 @@ export default function AutoSuggestMU(props) {
         setinputValue(value);
         let parents = await props.getOption(inputValue);
         setOptions(parents);
-    }
-
-
-    const handelSubmit = (event, value) => {
-
-        props.GetValues(value);
     };
 
     React.useEffect(() => {
         console.log('useEffect')
+
         let active = true;
 
         if (!loading) {
             return undefined;
         }
 
-        async function anyNameFunction() {
+        async function getOptionFromParent() {
             let parents = await props.getOption(inputValue);
             setOptions(parents);
-        }
 
-        anyNameFunction()
+        }
+        getOptionFromParent()
 
         return () => {
             active = false;
@@ -50,14 +46,23 @@ export default function AutoSuggestMU(props) {
         if (!open) {
             setOptions([]);
         }
-    }, [open]);
+    }, [open] );
+
+    React.useEffect(() => {
+
+        setdefaultValue(props.DefaultValue );
+
+    },[props.DefaultValue] );
+
+
 
     return (
+
+
         <Autocomplete
             multiple
-            id="asynchronous-demo"
-            className={"col-12"}
-            // style={{ width: 300 }}
+            id={name}
+            className={"col-12 m-2 ltr"}
             open={open}
             onOpen={() => {
                 setOpen(true);
@@ -65,18 +70,23 @@ export default function AutoSuggestMU(props) {
             onClose={() => {
                 setOpen(false);
             }}
-            getOptionSelected={(option, value) => option.permission_name === value.permission_name}
-            getOptionLabel={(option) => option.permission_name}
+            getOptionSelected={(option, value) => option[`${getnamefromOption}`] === value[`${getnamefromOption}`]}
+            getOptionLabel={(option) => option[`${getnamefromOption}`]}
             options={options}
             loading={loading}
 
-            onChange={handelSubmit}
+            value={defaultValue}
+            onChange={(event, newValue) => {
+                setdefaultValue(newValue);
+                props.GetValues(newValue, name);
+            }}
+
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    // error
-                    // helperText="Incorrect entry."
-                    label="permission"
+                    error={error.length>2?true:false}
+                    helperText={error.length>2? error :""}
+                    label={name}
                     onChange={handelChange}
                     variant="outlined"
                     InputProps={{

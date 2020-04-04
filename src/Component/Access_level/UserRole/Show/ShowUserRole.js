@@ -1,14 +1,14 @@
-import React, { useState,useEffect } from 'react';
-import {GetAllRole} from "../../../functions/ServerConnection";
+ import React, { useState,useEffect } from 'react';
+import {GetAllRole, GetAllUserRole} from "../../../functions/ServerConnection";
 import {error_Notification, getProductList} from "../../../functions/componentHelpFunction";
 import InfiniteScroll from "react-infinite-scroller";
 import Loader from "../../../Common/Loader/Loader";
-import ShowRolesInRow from "./subs/ShowRolesInRow";
+import ShowRoleUserInRow from "./subs/ShowRoleUserInRow/ShowRoleUserInRow";
 import ShowPermissionRow from "../../Permission/Show/subs/ShowPermissionRow";
 
 
 
-export default function ShowRole() {
+export default function ShowUserRole() {
 
 
     const [productSeparate, setproductSeparate] = useState([]);
@@ -18,23 +18,23 @@ export default function ShowRole() {
     const loadMore=async()=>{
 
 
-            // ***get all product and current page ***
-            let Response = await GetAllRole(pageStart);
-            if (Response.state===200) {
-                let{Description,page}=Response;
-                // // *******update state*****
-                setproductSeparate([...productSeparate,...Description]);
+        // ***get all product and current page ***
+        let Response = await GetAllUserRole(pageStart);
+        if (Response.state===200) {
+            let{Description,page}=Response;
+            // // *******update state*****
+            setproductSeparate([...productSeparate,...Description]);
 
-                setpageStart(page+1);
-                // ***** check if product length is zero then stop loop****
-                console.log(Description.length !== 0)
+            setpageStart(page+1);
+            // ***** check if product length is zero then stop loop****
+            console.log(Description.length !== 0)
 
-                sethasMore(Description.length !== 0);
-            }else {
-                let{state,Description}=Response;
+            sethasMore(Description.length !== 0);
+        }else {
+            let{state,Description}=Response;
 
-                error_Notification(state,Description)
-            }
+            error_Notification(state,Description)
+        }
 
 
 
@@ -53,7 +53,7 @@ export default function ShowRole() {
                 <section className="PermissionCard">
                     {productSeparate.length>0 && Array.isArray(productSeparate)  ?
                         productSeparate.map((todo, index) =>
-                            <ShowRolesInRow  content={todo}  key={index} class={' col-sm-6 col-lg-3  '}/>
+                            <ShowRoleUserInRow  content={todo}  key={index} class={' col-sm-6 col-lg-3  '}/>
 
                         ) : ''
                     }

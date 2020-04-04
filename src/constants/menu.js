@@ -35,7 +35,41 @@ const data = [
                     {
                         icon: "simple-icon-paper-plane",
                         label: "role Create",
-                        to: "/access-level/role/create"
+                        to: "/access-level/role/create/:Id?"
+                    }
+                ]
+            },
+            {
+                icon: "simple-icon-paper-plane",
+                label: "user role",
+                to: "/access-level/user-role",
+                subs: [
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "user role Show",
+                        to: "/access-level/user-role/show"
+                    },
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "user role Create",
+                        to: "/access-level/user-role/create/:Id?"
+                    }
+                ]
+            },
+            {
+                icon: "simple-icon-paper-plane",
+                label: "trusted service",
+                to: "/access-level/trusted_service",
+                subs: [
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "trusted service Show",
+                        to: "/access-level/trusted_service/show"
+                    },
+                    {
+                        icon: "simple-icon-paper-plane",
+                        label: "trusted serviceCreate",
+                        to: "/access-level/trusted_service/create/:Id?"
                     }
                 ]
             }

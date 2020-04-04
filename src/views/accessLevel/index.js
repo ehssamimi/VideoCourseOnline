@@ -10,6 +10,12 @@ const Permission = React.lazy(() =>
 const Roles = React.lazy(() =>
   import(/* webpackChunkName: "viwes-gogo" */ './role')
 );
+const UserRole = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './User-role')
+);
+const TrustedService = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './Trusted-service')
+);
 
 
 class App extends Component {
@@ -29,6 +35,13 @@ class App extends Component {
                 <Route
                 path={`${match.url}/role`}
                 render={props => <Roles {...props} />}
+              />
+                <Route
+                path={`${match.url}/user-role`}
+                render={props => <UserRole {...props} />}
+              />       <Route
+                path={`${match.url}/trusted_service`}
+                render={props => <TrustedService {...props} />}
               />
 
               <Redirect to="/error" />

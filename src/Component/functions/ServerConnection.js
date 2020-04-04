@@ -1420,8 +1420,32 @@ export async  function  GetDestination( ) {
 //     });
 //     return resp;
 // }
+// *************user*****
+export async  function  GetUserInfo(phone_number){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.User}admin_route/users/get_user_id?phone_number=${phone_number}`, {headers: headers}).then(function (response) {
+        console.log(response );
 
 
+        resp={state:200,Description:response.data };
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
 // ************permission**********
 export async  function  GetAllPermission(page_number){
 
@@ -1436,6 +1460,31 @@ export async  function  GetAllPermission(page_number){
 
         let {permissions,page}=response.data;
         resp={state:200,Description:permissions,page:page};
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  Getpermission(permission_name){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}permissions/get?name=${permission_name}`, {headers: headers}).then(function (response) {
+        console.log(response );
+
+        // let {permissions }=response.data;
+        resp={state:200,Description:response.data };
     }).catch(function (error) {
         console.log(error.response);
         console.log(error);
@@ -1478,7 +1527,8 @@ export async  function  AddPermission(Data){
     let headers = {
         'Token': Const.Token,
         'Content-Type': 'application/json',
-        'accept': 'application/json'
+        'accept': 'application/json',
+        'Access-Control-Allow-Origin':'*'
     };
     console.log(Data);
 
@@ -1521,6 +1571,149 @@ export async  function  DeletePermission(name){
             resp ={state:status,Description:data};
 
     }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        }else if (response.status===422){
+            resp={state:422,Description:response.statusText}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+
+
+
+}
+
+// **********role*********
+export async  function  GetAllRole(page_number){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}role/get-all?page=${page_number}`, {headers: headers}).then(function (response) {
+        console.log(response );
+        let {roles,page}=response.data;
+        resp={state:200,Description:roles,page:page};
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  Getrole(role_name){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}role/get?role_name=${role_name}`, {headers: headers}).then(function (response) {
+        console.log(response );
+
+        // let {permissions }=response.data;
+        resp={state:200,Description:response.data };
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  AddRole(Data){
+
+    let headers = {
+        'Token': Const.Token,
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+    };
+    console.log(Data);
+
+
+    var resp ="";
+    await axios.post(`${Const.Liara_Url}role/add`, Data, {headers: headers}).then(function (response) {
+        console.log(response );
+        let {Description}=response.data;
+        // let {Items} = response.data;
+        resp={state:200,Description:Description};
+
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  updateRole(Data){
+
+    let headers = {
+        'Token': Const.Token,
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+    };
+    console.log(Data);
+
+
+    var resp ="";
+    await axios.put(`${Const.Liara_Url}role/permissions/update`, Data, {headers: headers}).then(function (response) {
+
+        let {Description}=response.data;
+        // let {Items} = response.data;
+        resp={state:200,Description:Description};
+
+    }).catch(function (error) {
+
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  DeleteRole(name){
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+
+    let resp ={state:false,Description:""};
+    await axios.delete(`${Const.Liara_Url}role/delete?role_name=${name}`, {headers: headers}).then(function (response) {
+        console.log(response);
+        let{status,data}= response ;
+        console.log(status);
+        console.log( data);
+
+        resp ={state:status,Description:data};
+
+        resp ={state:status,Description:data};
+
+    }).catch(function (error) {
         console.log(error);
         // console.log(error.response.data.detail[0]['Name']);
         // resp ={state:false,Description:error.response.data.detail[0]['Name']};
@@ -1531,4 +1724,187 @@ export async  function  DeletePermission(name){
 
 
 }
+export async  function  SuggestRole(name){
 
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}role/drop-down?role_name=${name}`, {headers: headers}).then(function (response) {
+        console.log(response );
+
+
+        resp={state:200,Description:response.data.data };
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+
+// *************User-Role********
+export async  function  AddUserRole(Data){
+
+    let headers = {
+        'Token': Const.Token,
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+    };
+    console.log(Data);
+
+
+    var resp ="";
+    await axios.post(`${Const.Liara_Url}user_role_permission/add`, Data, {headers: headers}).then(function (response) {
+        console.log(response );
+
+        // let {Items} = response.data;
+        resp={state:200,Description:response.data};
+
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        }else if (response.status===422){
+            resp={state:422,Description:response.statusText}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  GetAllUserRole(page_number){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}user_role_permission/get-all?page=${page_number}`, {headers: headers}).then(function (response) {
+        console.log(response );
+        let {user_role_permissions,page}=response.data;
+        resp={state:200,Description:user_role_permissions,page:page};
+     }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  GetUserRole(user_id){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}user_role_permission?user_id=${user_id}`, {headers: headers}).then(function (response) {
+        console.log(response );
+
+        // let {permissions }=response.data;
+        resp={state:200,Description:response.data };
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+
+// *************Trusted-service********
+export async  function  AddTrustedService(Data){
+
+    let headers = {
+        'Token': Const.Token,
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+    };
+    console.log(Data);
+
+
+    var resp ="";
+    await axios.post(`${Const.Liara_Url}trusted_service/add`, Data, {headers: headers}).then(function (response) {
+
+
+        // let {Items} = response.data;
+        resp={state:200,Description:response.data};
+
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        }else if (response.status===422){
+            resp={state:422,Description:response.statusText}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  GetAllTrustedService(page_number){
+
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+    var resp ="";
+    await axios.get(`${Const.Liara_Url}trusted_service/get-all?page=${page_number}`, {headers: headers}).then(function (response) {
+        console.log(response );
+        let {trusted_services,page}=response.data;
+        resp={state:200,Description:trusted_services,page:page};
+    }).catch(function (error) {
+        console.log(error.response);
+        console.log(error);
+        let {response}=error;
+        if (response===undefined){
+            resp={state: 400,Description: error.message}
+        } else{
+            resp={state:response.status||400,Description:response.data.detail||error.message}
+        }
+    });
+    return resp;
+}
+export async  function  DeleteTrustedService(name){
+    let headers = {
+        'Token': Const.Token,
+        'accept': 'application/json'
+    };
+    let resp ={state:false,Description:""};
+    await axios.delete(`${Const.Liara_Url}trusted_service/remove?service_name=${name}`, {headers: headers}).then(function (response) {
+        console.log(response);
+        let{status,data}= response ;
+        resp ={state:status,Description:data};
+    }).catch(function (error) {
+        console.log(error);
+        // console.log(error.response.data.detail[0]['Name']);
+        // resp ={state:false,Description:error.response.data.detail[0]['Name']};
+        resp='error'
+    });
+    return resp;
+
+
+
+}

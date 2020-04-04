@@ -92,7 +92,7 @@ export const LabelValueOption=(sub)=>{
         });
         return SubCat;
 }
-// ***********************
+// *************Remove item**********
 export const RemoveItem=(id)=>{
     const $el = document.getElementById(id);
     const duration = 2;
@@ -102,3 +102,41 @@ export const RemoveItem=(id)=>{
         $el.remove();
     }, 2000)
 };
+// *************permission option******
+export const PermissionOptions=(sub)=>{
+    let SubCat=[];
+    sub.map((each,index)=>{
+        // let subRow= { value: each , label: each  };
+        let subRow= {permission_name: each, description: each };
+        SubCat.push(subRow);
+    });
+    return SubCat;
+}
+export const permissionOptionReverse=(sub)=>{
+    let SubCat=[];
+    sub.map((each,index)=>{
+        // let subRow= { value: each , label: each  };
+        let subRow= each.permission_name;
+        SubCat.push(subRow);
+    });
+    return SubCat;
+}
+// *************Role option******
+export const RoleOptions=(sub)=>{
+    let SubCat=[];
+    sub.map((each,index)=>{
+        // let subRow= { value: each , label: each  };
+        let subRow= {role_name: each, description: each };
+        SubCat.push(subRow);
+    });
+    return SubCat;
+}
+export const roleOptionReverse=(sub)=>{
+    let SubCat=[];
+    sub.map((each,index)=>{
+        // let subRow= { value: each , label: each  };
+        let subRow= each.role_name;
+        SubCat.push(subRow);
+    });
+    return SubCat;
+}

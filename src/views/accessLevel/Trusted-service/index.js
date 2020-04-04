@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 
 
 const Show = React.lazy(() =>
-  import(/* webpackChunkName: "viwes-gogo" */ './../../../Component/Access_level/Role/Show/Show_role')
+  import(/* webpackChunkName: "viwes-gogo" */ './../../../Component/Access_level/TrustedService/Show/ShowTrustedService')
 );
 const Create = React.lazy(() =>
-  import(/* webpackChunkName: "viwes-gogo" */ './../../../Component/Access_level/Role/Create/Create_Role')
+  import(/* webpackChunkName: "viwes-gogo" */ './../../../Component/Access_level/TrustedService/Create/CreateTrustedService')
 );
 
 

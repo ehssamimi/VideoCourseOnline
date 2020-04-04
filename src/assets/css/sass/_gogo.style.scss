@@ -148,8 +148,9 @@ body {
   }
 }
 
-.rtl * {
+.rtl * :not(.formmmmmm){
   text-align: right;
+
 }
 
 .fixed-background {
@@ -8677,7 +8678,7 @@ i.large-icon {
 
 
 
-.PermissionCard .card h2 {
+.PermissionCard .card ,.card2 h2 {
   font-size: 1rem;
   color: $theme-color-1;
 }
@@ -8688,14 +8689,20 @@ i.large-icon {
 }
 
 
-.PermissionCard .card {
+.PermissionCard .card , .card2{
   background: white;
   margin-bottom: 2em;
 }
 
-.PermissionCard .card a {
+.PermissionCard .card, .card2 a {
   color: black;
   text-decoration: none;
+}
+.card2 h2{
+  color: black!important;
+}
+.fs-light{
+  font-weight: lighter!important;
 }
 
 //.PermissionCard .card :hover {
@@ -8719,7 +8726,7 @@ i.large-icon {
 /* Flexbox stuff */
 
 
-.PermissionCard .card {
+.PermissionCard .card, .card2 {
   flex: 1 0 500px;
   box-sizing: border-box;
   margin: 1rem .25em;
@@ -8737,16 +8744,36 @@ i.large-icon {
   }
 }
 
-.PermissionCard .centered {
-  margin: 0 auto;
-  padding: 0 1em;
-}
-
 @media screen and (min-width: 52em) {
   .PermissionCard  .centered {
     max-width: 52em;
   }
 }
+
+@media screen and (min-width: 40em) {
+  .PermissionCard .card2 {
+    max-width: calc(50% -  1em);
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .PermissionCard .card2 {
+    max-width: calc(50% - 1em);
+  }
+}
+
+@media screen and (min-width: 52em) {
+  .PermissionCard  .centered2 {
+    max-width: 52em;
+  }
+}
+
+.PermissionCard .centered, .centered2 {
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+
 
 .img-self-fill{
   object-fit: fill;
@@ -8764,6 +8791,23 @@ i.large-icon {
   font-size: 90%;
 }
 .ltr{
-  text-align: left;
-  direction: ltr;
+  text-align: left!important;
+  direction: ltr!important;
+}
+
+//#formmmm {
+//  text-align: left!important;
+//  direction: ltr!important;
+//}
+.header_card{
+  font-size:0.9rem!important;
+  color: $theme-color-1;
+}
+.content_card{
+  font-size: 90%;
+  color: $primary-color!important;
+}
+.mlr-auto{
+  margin-right: auto;
+  margin-left: auto;
 }
